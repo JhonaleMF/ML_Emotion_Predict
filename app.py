@@ -30,10 +30,11 @@ def consulta():
     if request.method == "GET": 
         if "text" in request.args:
             #request.get_json()['title']
-            consulta = signs_texts(request.args.get('text', None))
+            consulta = signs_texts(request.args["text"])
             consulta = remove_stopwords(consulta)
             consulta = spanish_stemmer(consulta)
             prediction = model.predict(pd.Series(consulta))[0]
+            print(prediction)
             return jsonify({"respond":emotions_array[prediction]})
       
         else:
@@ -48,6 +49,7 @@ def consulta():
                     consulta = remove_stopwords(consulta)
                     consulta = spanish_stemmer(consulta)
                     prediction = model.predict(pd.Series(consulta))[0]
+                    print(prediction)
                     respond = "Emoción:"
                     flash(respond)
                     flash(emotions_array[prediction])
