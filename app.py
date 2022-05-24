@@ -29,11 +29,13 @@ def consulta():
     form = ValidateDate()
     if request.method == "GET": 
         if "text" in request.args:
+            #request.get_json()['title']
             consulta = signs_texts(request.args.get('text', None))
             consulta = remove_stopwords(consulta)
             consulta = spanish_stemmer(consulta)
             prediction = model.predict(pd.Series(consulta))[0]
             return jsonify({"respond":emotions_array[prediction]})
+      
         else:
         
             return render_template("predict.html", form=form)
