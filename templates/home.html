@@ -1,0 +1,36 @@
+{% extends "template.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+
+
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    {% for message in messages %}
+        <p class="error">{{ message }}</p>
+    {% endfor %}
+{% endif %}
+{% endwith %}
+
+<h2>Modelo detección de emociones de un Tweet</h2>
+
+<p>
+    Esta API puedes usarla de dos maneras, a través de esta interfaz o atacando los endpoints correspondientes
+    usando las URL's respectivas, en este apartado podrás ver las URL's y el formato necesario para hacer la consulta.
+</p>
+
+<p>
+    Puedes usar esta interfaz gráfica para dirigirte al endpoint de la detección de emoción "Consulta", allí, ingresar el texto y dar clic en "submit".
+    Posteriormente, recibirás la emoción correspondiente al texto introducido, con su respectiva información.
+</p>
+<nav>
+    <p><a href="/api/v1/consulta">Consulta</a></p>
+    </nav>
+<p>
+    También puedes hacer solicitudes mediante URL con los siguientes endpoints (parametro o key "text", con su respectivo tweet(value)):
+    <p>- /api/v1/consulta?text=Respuesta ingresada</p>
+</p>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "template.html" %}
+
+{% block title %} Predicciones {% endblock %}
+
+{% block content %}
+
+<nav>
+<p><a href="/">Home</a></p>
+</nav>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    {% for message in messages %}
+        <p class="error">{{ message }}</p>
+    {% endfor %}
+{% endif %}
+{% endwith %}
+
+<h2>Ingrese el tweet:</h2>
+<p>Tweet(máximo de caracteres 500):</p>
+
+
+<form action="/api/v1/consulta" method="POST">
+    <div>
+        
+        <textarea rows = "5" cols = "60" maxlength = "500" name="name" id="name" size=20 required></textarea>
+        <input type="hidden" name ="id" value="<%= request.getParameter('id_param')%>">
+    </div>
+
+    <p><div class="form-field">{{ form.submit }}</div></p>
+</form>
+
+
+
+{% endblock %}
